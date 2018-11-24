@@ -29,8 +29,20 @@ export default class App extends Component {
       }
   }
 
-  addToCart = (item) => {
-    console.log("added item to cart")
+  addToCart = ({product, quantity}) => {
+    //find the maximum existing id
+    const maxId = this.state.items
+      .reduce((acc, el) => Math.max(acc, el.id), 0)
+    //calculate the id for the item to be added
+    const nextMaxId = maxId + 1
+    console.log("nextMaxId: ", nextMaxId)
+    // const product = { id: nextMaxId, item, reason }
+    // const addItem = [...this.state.items, newItem]
+    //set the new state
+    // this.state.items.setState({
+    //   ...this.state.items,
+    //   items: addItem
+    // })
   }
 
   render() {
