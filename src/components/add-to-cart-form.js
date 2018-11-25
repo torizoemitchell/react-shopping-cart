@@ -13,7 +13,6 @@ export default class AddToCartForm extends React.Component{
 
   onSubmit = (e) => {
     e.preventDefault()
-    console.log("sumbit stuff")
     //add to state by calling add to cart from parent class
     const { quantity, product } = this.state
     const { addToCartCB } = this.props
@@ -22,10 +21,17 @@ export default class AddToCartForm extends React.Component{
 
   onProductSelect = (e) => {
     e.preventDefault()
-    console.log("selected a product")
     this.setState({
       ...this.state,
       product: e.target.value
+    })
+  }
+
+  onQuantitySelect = (e) => {
+    e.preventDefault()
+    this.setState({
+      ...this.state,
+      quantity: e.target.value
     })
   }
 
@@ -44,7 +50,7 @@ export default class AddToCartForm extends React.Component{
                 {this.props.products.map((elem) => <option key={elem.id}>{elem.name}</option>)}
               </select>
             <label>Quantity</label>
-            <input type="integer" className="form-control" defaultValue={this.state.quantity} onChange={this.onItemChange} />
+            <input type="integer" className="form-control" defaultValue={this.state.quantity} onChange={this.onQuantitySelect} />
             <input type="submit" className="btn btn-primary"/>
 
           </form>

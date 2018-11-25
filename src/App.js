@@ -35,14 +35,27 @@ export default class App extends Component {
       .reduce((acc, el) => Math.max(acc, el.id), 0)
     //calculate the id for the item to be added
     const nextMaxId = maxId + 1
-    console.log("nextMaxId: ", nextMaxId)
-    // const product = { id: nextMaxId, item, reason }
-    // const addItem = [...this.state.items, newItem]
+    //loop through products to find the existing product information to add to the cart
+    let addProduct = {}
+    this.state.products.forEach((elem) =>{
+      if(elem.name === product){
+        addProduct = elem
+      }
+    })
+
     //set the new state
-    // this.state.items.setState({
-    //   ...this.state.items,
-    //   items: addItem
-    // })
+    this.setState({
+      ...this.state,
+      items: this.state.items.concat({
+          id:nextMaxId,
+          product: addProduct,
+          quantity: quantity
+        })
+    })
+  }
+
+  calculateTotalPrice = () => {
+    const total = this.state.items.map()
   }
 
   render() {
@@ -51,6 +64,7 @@ export default class App extends Component {
       <div className="App">
         <CartHeader/>
         <CartItems items={this.state.items} />
+        <h5>Total Price: ${this.state.items.map((elem) => (elem.product.priceInCents * elem.quantity)).reduce((acc, idx) => (acc + idx))/100}</h5>
         <AddToCartForm addToCartCB={this.addToCart} products={this.state.products}/>
         <CartFooter copyright="2016"/>
       </div>
